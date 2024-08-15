@@ -6,93 +6,96 @@
     <title>My Projects</title>
     <style>
         body {
-            background-color: white;
-            color: black;
+            margin: 0;
             font-family: Arial, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
         }
 
-        body.dark-mode {
-            background-color: black;
-            color: white;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        button {
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
         }
 
         .theme-toggle {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 20px;
         }
 
-        .theme-toggle span {
+        .toggle-label {
             margin: 0 10px;
-            font-weight: bold;
+            font-size: 1em;
         }
 
-        .switch {
+        .toggle-switch {
             position: relative;
-            display: inline-block;
             width: 60px;
-            height: 34px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            height: 30px;
             background-color: #ccc;
-            transition: 0.4s;
-            border-radius: 34px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .slider:before {
-            position: absolute;
+        .toggle-switch:before {
             content: "";
-            height: 26px;
+            position: absolute;
             width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: 0.4s;
+            height: 26px;
+            background-color: #fff;
             border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
         }
 
-        input:checked + .slider {
-            background-color: #2196F3;
+        input[type="checkbox"]:checked + .toggle-switch:before {
+            transform: translateX(30px);
         }
 
-        input:checked + .slider:before {
-            transform: translateX(26px);
+        input[type="checkbox"]:checked + .toggle-switch {
+            background-color: #333;
+        }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #f0f0f0;
         }
     </style>
 </head>
-<body>
-    <div class="theme-toggle">
-        <span>Light</span>
-        <label class="switch">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider"></span>
-        </label>
-        <span>Dark</span>
+<body class="light-mode">
+    <div class="container">
+        <h1>My Projects</h1>
+        <button onclick="window.location.href='https://chumbledev.github.io/flashplayer/';">Flash Player Online</button>
+        <div class="theme-toggle">
+            <span class="toggle-label">Light</span>
+            <input type="checkbox" id="theme-toggle-checkbox">
+            <label for="theme-toggle-checkbox" class="toggle-switch"></label>
+            <span class="toggle-label">Dark</span>
+        </div>
     </div>
-
-    <section id="my-projects">
-        <h2>My Projects</h2>
-        <button onclick="location.href='https://chumbledev.github.io/flashplayer/'">Flash Player Online</button>
-    </section>
-
     <script>
-        document.getElementById('theme-toggle').addEventListener('change', function() {
-            document.body.classList.toggle('dark-mode');
+        const toggleCheckbox = document.getElementById('theme-toggle-checkbox');
+
+        toggleCheckbox.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode', toggleCheckbox.checked);
         });
     </script>
 </body>
